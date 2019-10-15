@@ -14,13 +14,14 @@ def generate_pass(length=21):
     password = []
 
     while len(password) < length:
-        key = choice(char_set.keys())
+        key = choice([char_set["small"],char_set["big"],char_set["special"],char_set["nums"]])
         a_char = urandom(1)
-        if a_char in char_set[key]:
-            if check_prev_char(password, char_set[key]):
+        n = choice(key)
+        if n in key:
+            if check_prev_char(password, n):
                 continue
             else:
-                password.append(a_char)
+                password.append(n)
     return ''.join(password)
 
 
@@ -39,4 +40,4 @@ def check_prev_char(password, current_char_set):
             return False
 
 if __name__ == '__main__':
-    print generate_pass()
+    print (generate_pass())
